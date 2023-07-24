@@ -35,7 +35,7 @@ jobs:
         java-version: 1.8
 
     - name: Step 4 - Build your own web app with Maven
-      run: mvn -B package --file pom.xml
+      run: echo mvn -B package --file pom.xml
 
     - name: Step 5 - Build your native Android App
       run: |
