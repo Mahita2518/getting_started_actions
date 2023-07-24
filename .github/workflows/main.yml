@@ -23,18 +23,44 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+    - name: Step 1 - Log the pre-build disk space
+      run: df
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: sh ./github_actions_script.sh
+    - name: Step 2 - Checkout the main GitHub Branch
+      uses: actions/checkout@v3
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-            echo Nothing to see in multi-line script
-            echo Here is what is in the folder 
-            ls -a 
+    - name: Step 3 - Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+
+    - name: Step 4 - Build your own web app with Maven
+      run: mvn -B package --file pom.xml
+
+    - name: Step 5 - Build your native Android App
+      run: |
+        echo Here is the ANDROID_SDK_ROOT
+        echo $ANDROID_SDK_ROOT
+
+    - name: Step 6 - Build the native Android App
+      run: |
+        echo the SELENIUM_JAR_PATH
+        echo $SELENIUM_JAR_PATH
+
+    - name: Step 7 - Log build tool versions
+      run: |
+        git --version
+        mvn --version
+        ant --version
+        gradle --version
+
+    - name: Step 8 - Log the post build disk space
+      run: df
+
+
+
+
+
         
         
         
